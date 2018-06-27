@@ -13,41 +13,92 @@ ul,ol,li{
 	list-style: none;
 }
 p,dl,dd,h1,h2,h3{
+  padding: 0;
 	margin: 0;
+}
+textarea{
+  padding: 0;
 }
 .clearfix::after{
   content: '';
   display: block;
   clear: both;
 }
+*{
+  box-sizing: border-box;
+}
 /*0000000000000000*/
 .page{
   border: 1px solid red;
 }
-.songList,.upLoad>div{
+.list-wrapper,.upLoad>div{
   border: 1px solid red;
 }
 .upLoad,.upLoad>aside{
   border: 1px solid red;
 }
 .title{
-  background: #eee;
+  background: #5DCEC3 ;
   height: 10vh;
 }
 .page{
   display: flex;
-  height: 70vh;
+  height: 90vh;
+}
+.list-wrapper{
+  width: 300px;
+  background-color: #eee;
+}
+.list-wrapper .songList li{
+  border: 1px solid black;
+  height: 50px;
 }
 .songList{
-  width: 300px;
+  overflow: auto;
+  height: 70vh;
+}
+.songList::-webkit-scrollbar {
+  width: 10px;
+}
+
+.songList::-webkit-scrollbar-track {
+  background-color: #eee;
+}
+
+.songList::-webkit-scrollbar-thumb {
+  background: #1d10103d;
+  border-radius: 2px;
+  }
+.list-wrapper .upLoad-wrapper{
+  border: 1px solid red;
+  height: 20vh;
 }
 .upLoad{
+  flex: 1;
+}
+.upLoad .songInfo>form{
+  
+}
+.upLoad .songInfo>form>.row{
+  padding: 10px;
   display: flex;
-  flex: 1;
 }
-.upLoad .left{
-  flex: 1;
+.upLoad .songInfo>form>.row>label{
+   width: 5em;
+   margin-right: 10px;
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
 }
-.upLoad .right{
-  width: 300px;
+.upLoad .songInfo>form>.row>input[type=text]{
+  height: 25px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+}
+.upLoad .songInfo>form>.row>textarea{
+  resize: none;
+}
+.upLoad .songInfo>form>.row.action{
+  margin-left: calc(5em + 10px);
 }
