@@ -1,0 +1,53 @@
+body{
+  background: #EFEFEF;
+  color: black;
+  margin: 0;
+}
+a{
+	color: inherit;
+ 	text-decoration: none;
+}
+ul,ol,li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+p,dl,dd,h1,h2,h3{
+	margin: 0;
+}
+.clearfix::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+/*0000000000000000*/
+.page{
+  border: 1px solid red;
+}
+.songList,.upLoad>div{
+  border: 1px solid red;
+}
+.upLoad,.upLoad>aside{
+  border: 1px solid red;
+}
+.title{
+  background: #eee;
+  height: 10vh;
+}
+.page{
+  display: flex;
+  height: 70vh;
+}
+.songList{
+  width: 300px;
+}
+.upLoad{
+  display: flex;
+  flex: 1;
+}
+.upLoad .left{
+  flex: 1;
+}
+.upLoad .right{
+  width: 300px;
+}
