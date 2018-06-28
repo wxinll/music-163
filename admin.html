@@ -11,57 +11,36 @@
 	</section>
 	<div class="page">
 		<aside class="list-wrapper">
-			<ul class="songList">
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>	
-			</ul>
+			<div class="songList-wrapper">
+				
+			</div>
+			
+			<div class="newSong">
+				
+			</div>
 			<div class="upLoad-wrapper">
-				拖拽上传			
+				拖拽上传
+				<div id="uploadButton">
+					拖拽或点击上传
+				</div>	
 			</div>
 		</aside>
 		
 		<main class="upLoad">
 			<div class="songInfo">
-				<h1>歌曲信息</h1>
-				<form autocomplete="off">
-					<div class="row">
-						<label>歌曲标题</label>
-						<input name="name" type="text" value="">
-					</div>
-					<div class="row">
-						<label>歌手</label>
-						<input name="name" type="text" value="">
-					</div>
-					<div class="row">
-						<label>歌曲外链</label>
-						<input name="name" type="text" value="">
-					</div>
-					<div class="row">
-						<label>歌词</label>
-						<textarea name="" id="" cols="100" rows="10"></textarea>
-					</div>
-					<div class="row action">
-						<button type="submit">保存</button>
-					</div>
-				</form>
+				
 			</div>
 		</main>
 	</div>
+	<script src="node_modules/leancloud-storage/dist/av-min.js"></script>
+	<script src="./node_modules/plupload/js/moxie.min.js"></script>
+	<script src="./node_modules/plupload/js/plupload.min.js"></script>
+	<script src="./node_modules/qiniu-js/dist/qiniu.min.js"></script>
+	<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="upLoad.js"></script>
+	<script src="songForm.js"></script>
+	<script src="songList.js"></script>
+	<script src="addSong.js"></script>
+
 </body>
 </html>

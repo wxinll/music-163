@@ -28,6 +28,10 @@ textarea{
   box-sizing: border-box;
 }
 /*0000000000000000*/
+body{
+  font-size: 12px;
+  line-height: 1.5;
+}
 .page{
   border: 1px solid red;
 }
@@ -53,31 +57,43 @@ textarea{
   border: 1px solid black;
   height: 50px;
 }
-.songList{
+.list-wrapper .songList{
   overflow: auto;
-  height: 70vh;
+  height: 60vh;
 }
-.songList::-webkit-scrollbar {
+.list-wrapper .songList::-webkit-scrollbar {
   width: 10px;
 }
 
-.songList::-webkit-scrollbar-track {
+.list-wrapper .songList::-webkit-scrollbar-track {
   background-color: #eee;
 }
 
-.songList::-webkit-scrollbar-thumb {
+.list-wrapper .songList::-webkit-scrollbar-thumb {
   background: #1d10103d;
   border-radius: 2px;
   }
+.list-wrapper .newSong{
+  border: 1px solid red;
+  height: 10vh
+}  
 .list-wrapper .upLoad-wrapper{
   border: 1px solid red;
   height: 20vh;
+}
+.upLoad-wrapper{
+
+}
+#uploadButton{
+  padding: 40px 40px;
+  border: 1px dashed black;
+  text-align: center;
 }
 .upLoad{
   flex: 1;
 }
 .upLoad .songInfo>form{
-  
+  font-size: 14px;
 }
 .upLoad .songInfo>form>.row{
   padding: 10px;
@@ -102,3 +118,4 @@ textarea{
 .upLoad .songInfo>form>.row.action{
   margin-left: calc(5em + 10px);
 }
+
