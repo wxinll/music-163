@@ -82,40 +82,41 @@ body{
   height: 20vh;
 }
 .upLoad-wrapper{
-
+  text-align: center;
 }
-#uploadButton{
+.upLoad-wrapper #uploadButton{
   padding: 40px 40px;
   border: 1px dashed black;
   text-align: center;
+  cursor: pointer;
 }
-.upLoad{
+.songInfo-wrapper{
   flex: 1;
 }
-.upLoad .songInfo>form{
+.songInfo-wrapper .songInfo>form{
   font-size: 14px;
 }
-.upLoad .songInfo>form>.row{
+.songInfo-wrapper .songInfo>form>.row{
   padding: 10px;
   display: flex;
 }
-.upLoad .songInfo>form>.row>label{
+.songInfo-wrapper .songInfo>form>.row>label{
    width: 5em;
    margin-right: 10px;
    display: flex;
    align-items: center;
    justify-content: flex-end;
 }
-.upLoad .songInfo>form>.row>input[type=text]{
+.songInfo-wrapper .songInfo>form>.row>input[type=text]{
   height: 25px;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
 }
-.upLoad .songInfo>form>.row>textarea{
+.songInfo-wrapper .songInfo>form>.row>textarea{
   resize: none;
 }
-.upLoad .songInfo>form>.row.action{
+.songInfo-wrapper .songInfo>form>.row.action{
   margin-left: calc(5em + 10px);
 }
 
