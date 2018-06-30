@@ -50,12 +50,15 @@ body{
   height: 90vh;
 }
 .list-wrapper{
-  width: 300px;
+  width: 200px;
   background-color: #eee;
 }
 .list-wrapper .songList li{
   border: 1px solid black;
   height: 50px;
+}
+.list-wrapper .songList li.active{
+  background-color: #aaa;
 }
 .list-wrapper .songList{
   overflow: auto;
@@ -76,7 +79,10 @@ body{
 .list-wrapper .newSong{
   border: 1px solid red;
   height: 10vh
-}  
+}
+.list-wrapper .newSong.active{
+  background-color: #aaa;
+}
 .list-wrapper .upLoad-wrapper{
   border: 1px solid red;
   height: 20vh;

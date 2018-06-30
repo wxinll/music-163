@@ -6,11 +6,11 @@
 		},
 	}
 	let model = {
-		data: {
-
-		},
+		data:null,
 	}
 	let controller = {
+		model: null,
+		view: null,
 		init(view, model) {
 			this.view = view
 			this.model = model
@@ -47,10 +47,13 @@
 						var response = JSON.parse(info.response);
 						var sourceLink = 'http://' + domain + '/' + encodeURIComponent(response.key);
 						console.log('文件上传成功之后')
-						console.log({
-							name: response.key,
+						let data = {
+							title: response.key,
 							link: sourceLink,
-						})
+						}
+						this.model.data = data
+						eventHub.emit('upLoad',data)
+						//通知eventHub此模块upLoad完成，执行upLoad列表里对应的函数,data传到hub中被其它函数调用
 					},
 					'Error': function(up, err, errTip) {
 						//上传出错时,处理相关的事情

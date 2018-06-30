@@ -1,25 +1,24 @@
 {
 	let model = {
+		data: {
+			id:'',
+			title: '',
+			singer: '',
+			link: '',
+		},
 		init: function() {
 
 		},
-		fetch: function() {
+		find: function() {
 			var query = new AV.Query('songList')
 			return query.find().then((objects) => {
-				objects.forEach((value) => {
-					console.log({1:value})
+				//objects=array[r,r,r,r]
+				//r={attributes{},id}
+				objects.map((r)=>{
+					let {id,attributes} = r
+					data = {id,...attributes}
+					console.log(data)
 				})
-			}, function(error) {
-				// 异常处理
-			})
-		},
-		save: function(name, content) {
-			var Songlist = AV.Object.extend('songList');
-			var songList = new Songlist();
-			return songList.save({
-				'title': name,
-				'singer': content,
-				'link': null,
 			})
 		},
 	}
@@ -29,27 +28,21 @@
 		template: `
 			<ul class="songList">
 				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
-				<li>音乐名字</li>
 				<li>音乐名字</li>	
 			</ul>
 		`,
-		render() {
+		render(data) {
 			$(this.el).html(this.template)
+			let li = document.createElement('li')
+			$(li).attr('data-song-id',data.id)
+				.appendTo(this.el.find())
+		},
+		addActive() {
+
+		},
+		clearActive(){
+			$(this.el).find('.active')
+				.removeClass('active')
 		}
 	}
 
@@ -60,14 +53,26 @@
 			this.model = model
 			this.view = view
 
-			this.model.init()
+			// this.model.init()
+			this.model.find()
 			this.view.render()
-
+			this.bindEvents()
+			this.bindEventHub()
 		},
-		bindEvents(){
-
-		}
-		
+		bindEvents() {
+			$(this.view.el).on('click', 'li', (el) => {
+				$(el.currentTarget).addClass('active')
+					.siblings('.active')
+					.removeClass('active')
+				window.eventHub.emit('selected')
+			})
+		},
+		bindEventHub(){
+			eventHub.on('addSong',()=>{
+				this.view.clearActive()
+			})
+		},
 	}
-	controller.init(model,view)
+
+	controller.init(model, view)
 }

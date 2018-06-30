@@ -3,25 +3,44 @@
 		init() {
 
 		},
-		save(data) {
+		data:{
+			title:'', 
+			singer: '',
+			link:'',
+			id:'',
+		},
+		add(data) {
 			var Song = AV.Object.extend('songList');
 			var songList = new Song();
 			return songList.save({
 				'title': data.title,
 				'singer': data.singer,
 				'link': data.link,
-			}).then((success) => {
-				console.log(success)
+			}).then((newInfo) => {
+				console.log(data)
+				let {id,attributes} = newInfo
+				Object.assign(this.data,{id,...attributes})				
 			}, () => {
 				console.log('error')
 			})
 		},
+		update(data) {
+			var songList = AV.Object.createWithoutData('songList', data.id)
+			return songList.save({
+				'title': data.title,
+				'singer': data.singer,
+				'link': data.link,
+			}).then((newInfo) => {
+				Object.assign(this.data,data)
+			}, () => {
+				console.log('error')
+			})			
+		}
 	}
 
 	let view = {
 		el: '.songInfo-wrapper>.songInfo',
 		template: `
-			<h1>歌曲信息</h1>
 			<form autocomplete="off">
 				<div class="row">
 					<label>歌曲标题</label>
@@ -44,13 +63,17 @@
 				</div>
 			</form>
 		`,
-		render(data) {
+		render(data = {}) {
 			let placeholders = ['title', 'singer', 'link']
 			let html = this.template
 			placeholders.map((string) => {
 				html = html.replace(`__${string}__`, data[string] || '')
 			})
 			$(this.el).html(html)
+		},//如果没有传入data，则令data={}
+		reset(){
+			this.render()
+			$(this.el).prepend('<h1>新建歌曲</h1>')
 		}
 
 	}
@@ -64,22 +87,38 @@
 
 			this.view.render()
 			this.bindEvents()
+			this.bindEventHub()
 		},
 		bindEvents() {
-			$(this.el).find('button[type=submit]').on('submit', (e) => {
+			$(this.view.el).on('submit','form', (e) => {
 				e.preventDefault()
 				this.save()
 			})
 		},
 		save() {
-			let needs = 'name singer url'.split(' ')
+			let needs = 'title singer link'.split(' ') //array,[title,singer,,]
 			let data = {}
 			needs.map((str) => {
-				data[str] = $(this.view).find(`input[name=${str}]`)
+				data[str] = $(this.view.el).find(`input[name=${str}]`)
 					.val()
 			})
-			this.model.save(data)
+			// if(data.id){
+			// 	this.model.update(data)
+			//  window.eventHub.emit('update',data)
+			// }else{
+			// 	this.model.add(data)
+			//  window.eventHub.emit('add',data)
+			// }
+			this.model.add(data)
 		},
+		bindEventHub(){
+			eventHub.on('addSong',()=>{
+				this.view.reset()
+			})
+			eventHub.on('upLoad',(data)=>{
+				this.view.render(data)
+			})
+		}
 	}
 
 	controller.init(model, view)
