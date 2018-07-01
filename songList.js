@@ -1,10 +1,10 @@
 {
 	let model = {
 		data: {
-			songs: null,
+			songs: [],
 		},
 		init: function() {
-			this.find()
+
 		},
 		find: function() {
 			var query = new AV.Query('songList')
@@ -14,7 +14,7 @@
 				return this.data.songs = objects.map((r)=>{
 					let {id,attributes} = r
 					return {id,...attributes}
-				})//array[{id,...attributes},date2...]
+				})//array[{id,...attributes},date2...]，异步操作，所有代码执行完才能返回到数据
 			})
 		},
 	}
@@ -22,9 +22,7 @@
 	let view = {
 		el: '.list-wrapper .songList-wrapper',
 		template: `
-			<ul class="songList">
-				<li>音乐名字</li>
-				<li>音乐名字</li>	
+			<ul class="songList">	
 			</ul>
 		`,
 		render(data) {
@@ -33,7 +31,8 @@
 			let ul = $(this.el).find('ul')
 			songs.map((obj)=>{
 				let li = document.createElement('li')
-				$(li).text(obj.title).attr('data-song-id',obj.id)
+				$(li).text(obj.title)
+					.attr('data-song-id',obj.id)
 					.appendTo(ul)
 			})
 		},
@@ -51,35 +50,46 @@
 		view: null,
 		init() {
 			this.model = model
-			this.model.init()
 			this.view = view
 
-			console.log('this.model.data')
-			console.log(this.model.data)
-
-			console.log('this.model.data.songs')
-			console.log(this.model.data.songs)
-
-			console.log('var test = this.model.data')
-			console.log('test.songs')
-			var test = this.model.data
-			console.log(test.songs)
-
-			// this.view.render(this.model.data)
-			// this.bindEvents()
-			// this.bindEventHub()
+			this.renderList()
+			this.bindEvents()
+			this.bindEventHub()
+				// this.view.render(this.model.data)
+		},
+		renderList(){
+			this.model.find().then(()=>{
+					this.view.render(this.model.data)					
+				})
 		},
 		bindEvents() {
 			$(this.view.el).on('click', 'li', (el) => {
 				$(el.currentTarget).addClass('active')
 					.siblings('.active')
 					.removeClass('active')
-				window.eventHub.emit('selected')
+
+				let selectedId = $(el.currentTarget).attr('data-song-id') 
+				let songs = this.model.data.songs
+				let data
+				for(let i = 0;i<songs.length;i++){
+					if(songs[i].id === selectedId ){
+						data = songs[i] 
+						break
+					}
+				}
+				window.eventHub.emit('selected',data)
+				//data {id,...attributes}
 			})
 		},
 		bindEventHub(){
-			eventHub.on('addSong',()=>{
+			window.eventHub.on('addSong',()=>{
 				this.view.clearActive()
+			})
+			window.eventHub.on('upLoadSuccess',()=>{
+				// this.view.renderList()
+			})
+			window.eventHub.on('edit',()=>{
+				this.renderList()
 			})
 		},
 	}

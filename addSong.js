@@ -28,13 +28,15 @@
 		},
 		bindEvents(){
 			$(this.view.el).on('click',(el)=>{
-				$(el.currentTarget).addClass('active')
 				eventHub.emit('addSong')
 			})
 		},
 		bindEventHub(){
 			eventHub.on('selected',()=>{	
 				this.view.clearActive()
+			})
+			eventHub.on('addSong',()=>{
+				$(this.view.el).addClass('active')
 			})
 		}
 	}

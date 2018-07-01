@@ -46,13 +46,12 @@
 						var domain = up.getOption('domain');
 						var response = JSON.parse(info.response);
 						var sourceLink = 'http://' + domain + '/' + encodeURIComponent(response.key);
-						console.log('文件上传成功之后')
 						let data = {
 							title: response.key,
 							link: sourceLink,
 						}
 						this.model.data = data
-						eventHub.emit('upLoad',data)
+						eventHub.emit('upLoadSuccess',data)
 						//通知eventHub此模块upLoad完成，执行upLoad列表里对应的函数,data传到hub中被其它函数调用
 					},
 					'Error': function(up, err, errTip) {

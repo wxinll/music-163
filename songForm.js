@@ -1,13 +1,13 @@
 {
 	let model = {
 		init() {
-
-		},
-		data:{
-			title:'', 
-			singer: '',
-			link:'',
-			id:'',
+			this.data = {
+				title: '',
+				singer: '',
+				link: '',
+				lyrics: '',
+				id: '',
+			}
 		},
 		add(data) {
 			var Song = AV.Object.extend('songList');
@@ -16,10 +16,12 @@
 				'title': data.title,
 				'singer': data.singer,
 				'link': data.link,
+				'lyrics': data.lyrics,
 			}).then((newInfo) => {
-				console.log(data)
 				let {id,attributes} = newInfo
-				Object.assign(this.data,{id,...attributes})				
+				Object.assign(this.data,{id,...attributes})		
+				window.eventHub.emit('edit',{id,...attributes})
+				window.eventHub.emit('addSong')
 			}, () => {
 				console.log('error')
 			})
@@ -30,8 +32,11 @@
 				'title': data.title,
 				'singer': data.singer,
 				'link': data.link,
+				'lyrics': data.lyrics
 			}).then((newInfo) => {
-				Object.assign(this.data,data)
+				let {id,attributes} = newInfo
+				Object.assign(this.data,{id,...attributes})
+				window.eventHub.emit('edit',{id,...attributes})
 			}, () => {
 				console.log('error')
 			})			
@@ -64,16 +69,20 @@
 			</form>
 		`,
 		render(data = {}) {
-			let placeholders = ['title', 'singer', 'link']
+			let placeholders = ['title', 'singer', 'link', 'lyrics']
 			let html = this.template
 			placeholders.map((string) => {
 				html = html.replace(`__${string}__`, data[string] || '')
 			})
 			$(this.el).html(html)
+			if(data.id){
+				$(this.el).prepend('<h1>编辑歌曲</h1>')
+			}else{
+				$(this.el).prepend('<h1>新建歌曲</h1>')				
+			}
 		},//如果没有传入data，则令data={}
 		reset(){
 			this.render()
-			$(this.el).prepend('<h1>新建歌曲</h1>')
 		}
 
 	}
@@ -84,6 +93,7 @@
 		init(model, view) {
 			this.model = model
 			this.view = view
+			this.model.init()
 
 			this.view.render()
 			this.bindEvents()
@@ -93,30 +103,38 @@
 			$(this.view.el).on('submit','form', (e) => {
 				e.preventDefault()
 				this.save()
+				console.log('this.model.data.id')
+				console.log(this.model.data.id)
 			})
 		},
 		save() {
-			let needs = 'title singer link'.split(' ') //array,[title,singer,,]
-			let data = {}
+			let needs = 'title singer link lyrics'.split(' ') //array,[title,singer,,]
+			let song = {}
+			song.id = this.model.data.id
 			needs.map((str) => {
-				data[str] = $(this.view.el).find(`input[name=${str}]`)
+				song[str] = $(this.view.el).find(`input[name=${str}]`)
 					.val()
 			})
-			// if(data.id){
-			// 	this.model.update(data)
-			//  window.eventHub.emit('update',data)
-			// }else{
-			// 	this.model.add(data)
-			//  window.eventHub.emit('add',data)
-			// }
-			this.model.add(data)
+			if (song.id) {
+				this.model.update(song)
+				window.eventHub.emit('update', song)
+			} else {
+				this.model.add(song)
+			}
 		},
 		bindEventHub(){
-			eventHub.on('addSong',()=>{
-				this.view.reset()
+			eventHub.on('addSong',(data)=>{
+				this.model.init()
+				this.view.render() //{}render空数据
 			})
-			eventHub.on('upLoad',(data)=>{
-				this.view.render(data)
+			eventHub.on('upLoadSuccess',(data)=>{
+				window.eventHub.emit('addSong')
+				this.view.render(data) //{title,link}
+				Object.assign(this.model.data,data)
+			})
+			eventHub.on('selected',(data)=>{
+				this.view.render(data)//{allInfo}
+				Object.assign(this.model.data,data)
 			})
 		}
 	}
