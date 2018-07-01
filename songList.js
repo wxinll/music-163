@@ -1,24 +1,20 @@
 {
 	let model = {
 		data: {
-			id:'',
-			title: '',
-			singer: '',
-			link: '',
+			songs: null,
 		},
 		init: function() {
-
+			this.find()
 		},
 		find: function() {
 			var query = new AV.Query('songList')
 			return query.find().then((objects) => {
-				//objects=array[r,r,r,r]
+				//objects=array[r,r,r,r...]
 				//r={attributes{},id}
-				objects.map((r)=>{
+				return this.data.songs = objects.map((r)=>{
 					let {id,attributes} = r
-					data = {id,...attributes}
-					console.log(data)
-				})
+					return {id,...attributes}
+				})//array[{id,...attributes},date2...]
 			})
 		},
 	}
@@ -33,9 +29,13 @@
 		`,
 		render(data) {
 			$(this.el).html(this.template)
-			let li = document.createElement('li')
-			$(li).attr('data-song-id',data.id)
-				.appendTo(this.el.find())
+			let songs = data.songs
+			let ul = $(this.el).find('ul')
+			songs.map((obj)=>{
+				let li = document.createElement('li')
+				$(li).text(obj.title).attr('data-song-id',obj.id)
+					.appendTo(ul)
+			})
 		},
 		addActive() {
 
@@ -51,13 +51,23 @@
 		view: null,
 		init() {
 			this.model = model
+			this.model.init()
 			this.view = view
 
-			// this.model.init()
-			this.model.find()
-			this.view.render()
-			this.bindEvents()
-			this.bindEventHub()
+			console.log('this.model.data')
+			console.log(this.model.data)
+
+			console.log('this.model.data.songs')
+			console.log(this.model.data.songs)
+
+			console.log('var test = this.model.data')
+			console.log('test.songs')
+			var test = this.model.data
+			console.log(test.songs)
+
+			// this.view.render(this.model.data)
+			// this.bindEvents()
+			// this.bindEventHub()
 		},
 		bindEvents() {
 			$(this.view.el).on('click', 'li', (el) => {
