@@ -55,12 +55,15 @@
 			this.renderList()
 			this.bindEvents()
 			this.bindEventHub()
-				// this.view.render(this.model.data)
 		},
-		renderList(){
-			this.model.find().then(()=>{
-					this.view.render(this.model.data)					
-				})
+		renderList(update){
+			this.model.find().then(() => {
+				this.view.render(this.model.data)
+				if (update) {
+					$(this.view.el).find(`[data-song-id=${update.id}]`)
+						.addClass('active')
+				}
+			})
 		},
 		bindEvents() {
 			$(this.view.el).on('click', 'li', (el) => {
@@ -88,8 +91,15 @@
 			window.eventHub.on('upLoadSuccess',()=>{
 				// this.view.renderList()
 			})
-			window.eventHub.on('edit',()=>{
-				this.renderList()
+			window.eventHub.on('edit',(data)=>{
+				if(data.id){
+					//update
+					this.renderList(data)
+				}else{
+					//add new song
+					this.renderList()	
+				}
+
 			})
 		},
 	}

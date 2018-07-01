@@ -39,7 +39,6 @@
 					},
 					'UploadProgress': function(up, file) {
 						// 每个文件上传时,处理相关的事情
-						console.log('上传ing')
 					},
 					// 文件上传成功之后调用 FileUploaded
 					'FileUploaded': (up, file, info) => {

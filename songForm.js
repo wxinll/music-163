@@ -19,8 +19,9 @@
 				'lyrics': data.lyrics,
 			}).then((newInfo) => {
 				let {id,attributes} = newInfo
-				Object.assign(this.data,{id,...attributes})		
-				window.eventHub.emit('edit',{id,...attributes})
+				Object.assign(this.data,{id,...attributes})	
+				//data {title,...}	
+				window.eventHub.emit('edit',{...attributes})
 				window.eventHub.emit('addSong')
 			}, () => {
 				console.log('error')
@@ -36,6 +37,7 @@
 			}).then((newInfo) => {
 				let {id,attributes} = newInfo
 				Object.assign(this.data,{id,...attributes})
+				//data {id,...}
 				window.eventHub.emit('edit',{id,...attributes})
 			}, () => {
 				console.log('error')
@@ -103,8 +105,6 @@
 			$(this.view.el).on('submit','form', (e) => {
 				e.preventDefault()
 				this.save()
-				console.log('this.model.data.id')
-				console.log(this.model.data.id)
 			})
 		},
 		save() {
@@ -123,9 +123,11 @@
 			}
 		},
 		bindEventHub(){
-			eventHub.on('addSong',(data)=>{
-				this.model.init()
-				this.view.render() //{}render空数据
+			eventHub.on('addSong',()=>{
+				if(this.model.data.id){
+					this.model.init()
+				}
+				this.view.render(this.model.data)	
 			})
 			eventHub.on('upLoadSuccess',(data)=>{
 				window.eventHub.emit('addSong')
