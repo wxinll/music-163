@@ -6,7 +6,7 @@
 	let view = {
 		el: '.list-wrapper .newSong',
 		template: `
-			新建歌曲
+			<span>新建歌曲</span>
 		`,
 		render(){
 			$(this.el).html(this.template)

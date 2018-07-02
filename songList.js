@@ -25,16 +25,19 @@
 			<ul class="songList">	
 			</ul>
 		`,
-		render(data) {
+		render(data={}) {
 			$(this.el).html(this.template)
-			let songs = data.songs
-			let ul = $(this.el).find('ul')
-			songs.map((obj)=>{
-				let li = document.createElement('li')
-				$(li).text(obj.title)
-					.attr('data-song-id',obj.id)
-					.appendTo(ul)
-			})
+
+			if(JSON.stringify(data) !== '{}'){
+				let songs = data.songs
+				let ul = $(this.el).find('ul')
+				songs.map((obj)=>{
+					let li = document.createElement('li')
+					$(li).text(obj.title)
+						.attr('data-song-id',obj.id)
+						.appendTo(ul)
+				})
+			}
 		},
 		addActive() {
 
@@ -52,9 +55,13 @@
 			this.model = model
 			this.view = view
 
+			this.renderInit()
 			this.renderList()
 			this.bindEvents()
 			this.bindEventHub()
+		},
+		renderInit(){
+			this.view.render()
 		},
 		renderList(update){
 			this.model.find().then(() => {

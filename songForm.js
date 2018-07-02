@@ -1,5 +1,12 @@
 {
 	let model = {
+		data : {
+			title: '',
+			singer: '',
+			link: '',
+			lyrics: '',
+			id: '',
+		},
 		init() {
 			this.data = {
 				title: '',
@@ -63,7 +70,7 @@
 				</div>
 				<div class="row">
 					<label>歌词</label>
-					<textarea name="lyrics" id="" cols="100" rows="10"></textarea>
+					<textarea name="lyrics" id="" cols="80" rows="10"></textarea>
 				</div>
 				<div class="row action">
 					<button type="submit">保存</button>

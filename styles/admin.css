@@ -32,7 +32,7 @@ body{
   font-size: 12px;
   line-height: 1.5;
 }
-.page{
+/*.page{
   border: 1px solid red;
 }
 .list-wrapper,.upLoad>div{
@@ -40,10 +40,15 @@ body{
 }
 .upLoad,.upLoad>aside{
   border: 1px solid red;
-}
-.title{
-  background: #5DCEC3 ;
+}*/
+section.topbar{
+  background: #D43C33;
   height: 10vh;
+  padding: 2.5vh;
+}
+section.topbar .logo>svg {
+  height: 5vh;
+  vertical-align: top;
 }
 .page{
   display: flex;
@@ -52,13 +57,23 @@ body{
 .list-wrapper{
   width: 200px;
   background-color: #eee;
+  border-right: 1px solid rgba(185, 175, 175, 0.55);  
+}
+.list-wrapper .songList-wrapper{
+  background-color: #f5f5f7;
 }
 .list-wrapper .songList li{
-  border: 1px solid black;
   height: 50px;
+  padding-left: 20px;
+}
+.list-wrapper .songList li:nth-child(n){
+  background-color: #fafafa;
+}
+.list-wrapper .songList li:nth-child(2n){
+  background-color: #f5f5f7;
 }
 .list-wrapper .songList li.active{
-  background-color: #aaa;
+  background-color: #e3e3e5;
 }
 .list-wrapper .songList{
   overflow: auto;
@@ -69,22 +84,23 @@ body{
 }
 
 .list-wrapper .songList::-webkit-scrollbar-track {
-  background-color: #eee;
-}
+  /*background-color: #e1e1e2;
+*/}
 
 .list-wrapper .songList::-webkit-scrollbar-thumb {
-  background: #1d10103d;
+  background: #e1e1e2;
   border-radius: 2px;
-  }
+}
 .list-wrapper .newSong{
-  border: 1px solid red;
-  height: 10vh
+  display: flex;
+  height: 10vh;
+  justify-content: center;
+  align-items: center;
 }
 .list-wrapper .newSong.active{
   background-color: #aaa;
 }
 .list-wrapper .upLoad-wrapper{
-  border: 1px solid red;
   height: 20vh;
 }
 .upLoad-wrapper{
@@ -98,6 +114,10 @@ body{
 }
 .songInfo-wrapper{
   flex: 1;
+}
+.songInfo-wrapper .songInfo{
+  margin-left: 100px;
+  margin-top: 70px;
 }
 .songInfo-wrapper .songInfo>form{
   font-size: 14px;
@@ -125,4 +145,38 @@ body{
 .songInfo-wrapper .songInfo>form>.row.action{
   margin-left: calc(5em + 10px);
 }
-
+#loading-wrapper{
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255,255,255,0.6);
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+#loading-wrapper.active{
+  display: block;
+}
+#loading-wrapper::before{
+  content: '';
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: rgba(100,100,100,0.8);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -25px;
+  border-radius: 50%;
+  animation: loading 1s infinite alternate-reverse;
+  animation-timing-function: linear;
+}
+@keyframes loading{
+  0% {
+    transform: scale(1.0);
+  }
+  100% {
+    transform: scale(0.1);
+  }
+}

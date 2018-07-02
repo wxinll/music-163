@@ -34,10 +34,10 @@
 						});
 					},
 					'BeforeUpload': (up, file) => {
-
 						// 每个文件上传前,处理相关的事情
+						window.eventHub.emit('beforeUpload')
 					},
-					'UploadProgress': function(up, file) {
+					'UploadProgress': (up, file) => {
 						// 每个文件上传时,处理相关的事情
 					},
 					// 文件上传成功之后调用 FileUploaded
