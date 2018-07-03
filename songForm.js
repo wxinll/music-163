@@ -56,24 +56,30 @@
 		el: '.songInfo-wrapper>.songInfo',
 		template: `
 			<form autocomplete="off">
-				<div class="row">
-					<label>歌曲标题</label>
-					<input name="title" type="text" value="__title__">
+				<div class="row" for="title">
+					<label for="title">歌曲标题</label>
+					<input id="title" type="text" value="__title__">
 				</div>
 				<div class="row">
-					<label>歌手</label>
-					<input name="singer" type="text" value="__singer__">
+					<label for="singer">歌手</label>
+					<input id="singer" type="text" value="__singer__">
 				</div>
 				<div class="row">
-					<label>歌曲外链</label>
-					<input name="link" type="text" value="__link__">
+					<label for="link">歌曲外链</label>
+					<input id="link" type="text" value="__link__">
 				</div>
 				<div class="row">
-					<label>歌词</label>
-					<textarea name="lyrics" id="" cols="80" rows="10"></textarea>
+					<label for="lyrics">歌词</label>
+					<textarea id="lyrics" cols="80" rows="10"></textarea>
 				</div>
 				<div class="row action">
-					<button type="submit">保存</button>
+					<button type="submit" class="new">
+						<a href="#" class="set_1_btn Vbtn-3">
+							<svg>
+								<rect x="0" y="0" fill="none" width="100%" height="100%"></rect>
+							</svg> 保 存
+						</a>
+					 </button>
 				</div>
 			</form>
 		`,
@@ -119,14 +125,16 @@
 			let song = {}
 			song.id = this.model.data.id
 			needs.map((str) => {
-				song[str] = $(this.view.el).find(`input[name=${str}]`)
+				song[str] = $(this.view.el).find(`input[id=${str}]`)
 					.val()
 			})
-			if (song.id) {
-				this.model.update(song)
-				window.eventHub.emit('update', song)
-			} else {
-				this.model.add(song)
+			if(song.title){
+				if (song.id) {
+					this.model.update(song)
+					window.eventHub.emit('update', song)
+				} else {
+					this.model.add(song)
+				}
 			}
 		},
 		bindEventHub(){
