@@ -91,6 +91,12 @@ section>nav.tabs-nav>li.active>.text::after{
 ol.tab-content{
   padding-top: 105px;
 }
+ol.tab-content>li{
+  display: none;
+}
+ol.tab-content>li.active{
+  display: block;
+}
 ol.tab-content .sectiontitle{
   border-left: 2px solid #D43C33;
   font-size: 17px;
