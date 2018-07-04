@@ -128,7 +128,7 @@ ol.tab-content .playlists .songs>li>p{
 }
 
 section.songs ol.songlists{
-
+  margin-top: 18px;
 }
 section.songs ol.songlists>li>h3{
   font-size: 17px;
@@ -136,6 +136,21 @@ section.songs ol.songlists>li>h3{
 section.songs ol.songlists>li>p{
   font-size: 12px;
   color: #888;
+}
+section.songs ol.songlists>li>p .icon.sq{
+  fill: #FE672E;
+  width: 1em;
+}
+section.songs ol.songlists>li> .playButton{
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+section.songs ol.songlists>li>a .icon.play{
+  fill: #AAA;
+  width: 22px;
+  height: 22px;
 }
 section.songs ol.songlists>li{
   position: relative;

@@ -70,8 +70,14 @@ section.topbar .logo>svg {
 }
 .list-wrapper .songList li{
   height: 50px;
-  line-height: 50px;
   padding-left: 20px;
+  display: flex;
+  align-items: center;
+}
+.list-wrapper .songList li>span{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .list-wrapper .songList li:nth-child(n){
   background-color: #fafafa;
@@ -102,7 +108,7 @@ section.topbar .logo>svg {
   border-radius: 2px;
 }
 .list-wrapper .songList .icon{
-  width: 1.5em;
+  min-width: 1.5em;
   height: 1.5em;
   margin-right: 1em;
 }
