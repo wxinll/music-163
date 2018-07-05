@@ -1,0 +1,24 @@
+.playSong-wrap{
+	position: relative;
+}
+.playSong-wrap>.log{
+	position: absolute;
+	top: 0;
+	height: 30px;
+	border: 1px solid green;
+}
+.playSong-wrap>.song-wrap{
+	padding-top: 50px;
+	height: 150px;
+	border: 1px solid green;
+}
+.playSong-wrap>.song-info{
+	border: 1px solid green;
+	height: 100px;
+}
+.footer-link{
+	position: absolute;
+	height: 30px;
+	bottom: 0;
+	border: 1px solid green;
+}

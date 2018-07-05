@@ -61,7 +61,6 @@
 		},
 		renderList(){
 			this.model.find().then(()=>{
-				console.log(this.model.data.songs)
 				this.view.render(this.model.data)
 			})
 		}
