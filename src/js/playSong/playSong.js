@@ -6,10 +6,18 @@
 		},
 		render(data) {
 			let song = data.song
+			let status = data.status
 			if (this.$el.find('audio').attr('src') !== song.link) {
 				let audio = this.$el.find('audio')
 					.attr('src', song.link)
 					.get(0)
+			}
+			if(status === 'play'){
+				this.$el.find('.song-disc')
+					.addClass('active')
+			}else if(status === 'paused'){
+				this.$el.find('.song-disc')
+					.removeClass('active')
 			}
 		},
 		play() {
@@ -18,7 +26,6 @@
 		pause() {
 			this.$el.find('audio')[0].pause()
 		}
-
 	}
 	let model = {
 		data: {
@@ -28,6 +35,7 @@
 				singer: '',
 				link: '',
 			},
+			status: 'paused',
 		},
 		get(id){
 			var query = new AV.Query('songList')
@@ -52,6 +60,7 @@
 			this.model.get(id).then(()=>{
 				this.view.render(this.model.data)
 			})
+			this.bindEvents()
 		},
 		returnId() {
 			let search = window.location.search
@@ -73,6 +82,19 @@
 			}
 
 			return id
+		},
+		bindEvents(){
+			this.view.$el.find('.song-disc')
+				.on('click',()=>{
+					if(this.model.data.status === 'paused'){
+						this.model.data.status = 'play'
+						this.view.play()
+					}else if(this.model.data.status === 'play'){
+						this.model.data.status = 'paused'
+						this.view.pause()
+					}
+					this.view.render(this.model.data)
+				})
 		}
 
 	}
