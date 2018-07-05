@@ -1,16 +1,46 @@
+*{margin:0;padding:0;}
+*{box-sizing: border-box;}
+*::after{box-sizing: border-box;}
+*::before{box-sizing: border-box;}
+
+a{color: inherit; text-decoration: none;}
+ul,ol,li{list-style: none;}
+h1,h2,h3,h4,h5,h6{ font-weight: normal; }
+/*body{font:14px/1.5 Helvetica,sans-serif;}
+*/
+.play-page{
+	width: 100vw;
+	height: 100vh;
+	background-color: #7f7f7f;
+	/*background: url("//music.163.com/api/img/blur/109951163380470594");*/
+	background-size: cover;
+}
 .playSong-wrap{
 	position: relative;
 }
 .playSong-wrap>.log{
 	position: absolute;
-	top: 0;
-	height: 30px;
-	border: 1px solid green;
+	top: 12px;
+	left: 10px;
+	width: 100%;
+	height: 17px;
+	background: url(http://s3.music.126.net/m/s/img/logo.png?0c21b75d22d52b65dc8083343d161fe4) no-repeat;
+	background-size: auto 17px;
 }
 .playSong-wrap>.song-wrap{
-	padding-top: 50px;
-	height: 150px;
-	border: 1px solid green;
+	padding-top: 18vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.playSong-wrap>.song-wrap .songCover{
+	width: 44.5vw;
+	height: 44.5vw;
+	overflow: hidden;
+	border-radius: 50%;
+}
+.playSong-wrap>.song-wrap .songCover img{
+	width: 100%;
 }
 .playSong-wrap>.song-info{
 	border: 1px solid green;
