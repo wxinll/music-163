@@ -35,7 +35,7 @@
 				singer: '',
 				link: '',
 			},
-			status: 'paused',
+			status: 'play',
 		},
 		get(id){
 			var query = new AV.Query('songList')
@@ -61,6 +61,7 @@
 				this.view.render(this.model.data)
 			})
 			this.bindEvents()
+			this.setVolume()
 		},
 		returnId() {
 			let search = window.location.search
@@ -95,6 +96,10 @@
 					}
 					this.view.render(this.model.data)
 				})
+		},
+		setVolume(){
+			this.view.$el.find('audio')[0].volume = 0.2
+			this.view.$el.find('audio')[0].autoplay = true
 		}
 
 	}

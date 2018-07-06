@@ -82,8 +82,13 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 .playSong-wrap>.song-wrap .songCover img{
 	width: 100%;
 }
+.playSong-wrap>.song-wrap .circling{
+	animation: circling 20s infinite linear;
+	animation-delay: 1s;
+	animation-play-state: paused;
+}
 .playSong-wrap>.song-wrap .active .circling{
-	animation: circling 20s infinite linear; 
+	animation-play-state: running;
 }
 @keyframes circling{
 	0% {transform: rotate(0deg);}

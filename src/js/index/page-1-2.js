@@ -3,17 +3,17 @@
 		el: 'section.songs>ol.songlists',
 		template:`
 			<li>
-				<h3>__title__</h3>
-				<p>
-					<svg class="icon sq" aria-hidden="true">
-						<use xlink:href="#icon-sq"></use>
-					</svg>
-					__singer__
-				</p>
-				<a class="playButton" href="./playSong.html?id=__id__">
-					<svg class="icon play" aria-hidden="true">
-						<use xlink:href="#icon-play"></use>
-					</svg>
+				<a  href="./playSong.html?id=__id__">
+					<h3>__title__</h3>
+					<p>
+						<svg class="icon sq" aria-hidden="true">
+							<use xlink:href="#icon-sq"></use>
+						</svg>
+						__singer__
+					</p>
+						<svg class="icon play playButton" aria-hidden="true">
+							<use xlink:href="#icon-play"></use>
+						</svg>
 				</a>
 			</li>			
 		`,
