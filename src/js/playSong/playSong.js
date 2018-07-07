@@ -5,8 +5,7 @@
 			this.$el = $(this.el)
 		},
 		render(data) {
-			let song = data.song
-			let status = data.status
+			let {song,link,lyrics} = data
 			if (this.$el.find('audio').attr('src') !== song.link) {
 				let audio = this.$el.find('audio')
 					.attr('src', song.link)
