@@ -121,10 +121,41 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 	margin: 18px auto 0;
 	font-size: 14px;
 	color: #AEABAC;
+	height: 80px;
+	overflow: hidden;	
+}
+.playSong-wrap>.song-info .slide p{
+	padding-bottom: 8px;
+}
+.playSong-wrap>.song-info .slide p.active{
+	color: white;
+}
+@media screen and (min-width: 375px){
+	.playSong-wrap>.song-info .slide p {
+		font-size: 16px;
+	}
 }
 .footer-link{
 	position: absolute;
-	height: 30px;
-	bottom: 0;
-	border: 1px solid green;
+	height: 40px;
+	bottom: 10px;
+	padding: 0 2vw;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+.footer-link .linkBtn{
+	color: #d33a31;
+	font-size: 18px;
+	height: 40px;
+	width: 46vw;
+	border: 1px solid #d33a31;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 40px;
+}
+.footer-link .download{
+	color: #fff;
+	margin-left: 6vw; 
+	background-color: #d33a31;
 }

@@ -1,15 +1,25 @@
-{
+{	
 	let view = {
 		el: '#app',
 		init() {
 			this.$el = $(this.el)
 		},
-		render(data) {
-			let {song,link,lyrics} = data
+		render(data){
+			let {song,status} = data
+			let {lyrics} = song
 			if (this.$el.find('audio').attr('src') !== song.link) {
+
+				this.$el.find('.song-info>h2').text(song.title)
+
 				let audio = this.$el.find('audio')
 					.attr('src', song.link)
 					.get(0)
+
+				audio.ontimeupdate = ()=>{
+					this.showLyrics(audio.currentTime)
+				}
+
+				this.addLyrics(lyrics)
 			}
 			if(status === 'play'){
 				this.$el.find('.song-disc')
@@ -18,6 +28,25 @@
 				this.$el.find('.song-disc')
 					.removeClass('active')
 			}
+		},
+		addLyrics(lyrics){
+			lyrics.split('\n').map((string)=>{
+				let p = document.createElement('p')
+				let regex = /\[([\d:.]+)\](.+)/
+				let matches = string.match(regex)
+				if(matches){
+					p.textContent = matches[2]
+					let time = matches[1]
+					let parts = time.split(':')
+					let minutes = parts[0]
+					let seconds = parts[1]
+					let newTime = parseInt(minutes,10) * 60 + parseFloat(seconds,10)
+					p.setAttribute('data-time',newTime)
+				}else{
+					p.textContent = string
+				}
+				this.$el.find('.lyrics>.slide').append(p)
+			})
 		},
 		play() {
 			this.$el.find('audio')[0].play()
@@ -28,6 +57,33 @@
 		initAudio(){
 			this.$el.find('audio')[0].volume = 0.2
 			this.$el.find('audio')[0].autoplay = true
+		},
+		showLyrics(time){
+			let pArray = this.$el.find('.lyrics>.slide>p')
+			let p
+			for(let i=0;i<pArray.length;i++){
+				if(i + 1 < pArray.length){
+					let currentTime = pArray.eq(i).attr('data-time')
+					let nextTime = pArray.eq(i+1).attr('data-time')
+					if(currentTime <= time && time < nextTime){
+						p = pArray[i]
+						break
+					}
+				}else{
+					p = pArray[i]
+					break
+				}
+			}
+			let $target = this.$el.find('.lyrics>.slide')
+			let a = p.getBoundingClientRect().top
+			let b = $target[0].getBoundingClientRect().top
+			let distance = a - b
+			$target.css({
+				transform: `translateY(${- distance + 30}px)`
+			})
+			$(p).addClass('active')
+				.siblings('.active')
+				.removeClass('active')
 		}
 	}
 
