@@ -70,7 +70,7 @@
 				</div>
 				<div class="row">
 					<label for="lyrics">歌词</label>
-					<textarea id="lyrics" cols="80" rows="10"></textarea>
+					<textarea id="lyrics" cols="80" rows="10">__lyrics__</textarea>
 				</div>
 				<div class="row action">
 					<button type="submit" class="new">
@@ -125,7 +125,7 @@
 			let song = {}
 			song.id = this.model.data.id
 			needs.map((str) => {
-				song[str] = $(this.view.el).find(`input[id=${str}]`)
+				song[str] = $(this.view.el).find(`[id=${str}]`)
 					.val()
 			})
 			if(song.title){

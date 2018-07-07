@@ -90,10 +90,6 @@
 		},
 		bindEvents(){
 			this.view.$el.on('click','.song-disc',(e)=>{
-				console.log('e.currentTarget')
-				console.log(e.currentTarget)
-				console.log('e.target')
-				console.log(e.target)
 					if(this.model.data.status === 'paused'){
 						this.model.data.status = 'play'
 						this.view.play()
