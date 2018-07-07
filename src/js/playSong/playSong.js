@@ -25,8 +25,13 @@
 		},
 		pause() {
 			this.$el.find('audio')[0].pause()
+		},
+		initAudio(){
+			this.$el.find('audio')[0].volume = 0.2
+			this.$el.find('audio')[0].autoplay = true
 		}
 	}
+
 	let model = {
 		data: {
 			song: {
@@ -37,7 +42,7 @@
 			},
 			status: 'play',
 		},
-		get(id){
+		getSong(id){
 			var query = new AV.Query('songList')
 			return query.get(id).then((song) => {
 				Object.assign(this.data.song, {
@@ -57,11 +62,11 @@
 			this.view.init()
 			this.model = model
 			let id = this.returnId()
-			this.model.get(id).then(()=>{
+			this.model.getSong(id).then(()=>{
 				this.view.render(this.model.data)
+				this.view.initAudio()
 			})
 			this.bindEvents()
-			this.setVolume()
 		},
 		returnId() {
 			let search = window.location.search
@@ -81,12 +86,14 @@
 					break
 				}
 			}
-
 			return id
 		},
 		bindEvents(){
-			this.view.$el.find('.song-disc')
-				.on('click',()=>{
+			this.view.$el.on('click','.song-disc',(e)=>{
+				console.log('e.currentTarget')
+				console.log(e.currentTarget)
+				console.log('e.target')
+				console.log(e.target)
 					if(this.model.data.status === 'paused'){
 						this.model.data.status = 'play'
 						this.view.play()
@@ -96,12 +103,12 @@
 					}
 					this.view.render(this.model.data)
 				})
+			this.view.$el.find('audio')[0].addEventListener('ended',()=>{
+				this.model.data.status = 'paused'
+				this.view.render(this.model.data)
+			},true)
 		},
-		setVolume(){
-			this.view.$el.find('audio')[0].volume = 0.2
-			this.view.$el.find('audio')[0].autoplay = true
-		}
-
 	}
+	
 	controller.init(view, model)
 }
