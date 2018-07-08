@@ -79,16 +79,17 @@
 					break
 				}
 			}
-			let $target = this.$el.find('.lyrics>.slide')
-			let a = p.getBoundingClientRect().top
-			let b = $target[0].getBoundingClientRect().top
-			let distance = a - b
-			$target.css({
-				transform: `translateY(${- distance + 30}px)`
-			})
 			$(p).addClass('active')
 				.siblings('.active')
 				.removeClass('active')
+
+			let $slide = this.$el.find('.lyrics>.slide')
+			let a = p.getBoundingClientRect().top
+			let b = $slide[0].getBoundingClientRect().top
+			let distance = a - b -25
+			$slide.css({
+				transform: `translateY(${- distance }px)`
+			})
 		}
 	}
 

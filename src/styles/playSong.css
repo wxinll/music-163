@@ -9,11 +9,13 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 /*body{font:14px/1.5 Helvetica,sans-serif;}
 */
 .play-page{
+	position: fixed;
 	width: 100vw;
 	height: 100vh;
 	background-color: #7f7f7f;
 	background: url("http://p4.music.126.net/dhGzTDd3yk1pdiIZgUtZVA==/17638365532850019.jpg");
 	background-size: cover;
+	overflow-x: hidden;
 }
 .playSong-wrap{
 	position: relative;
@@ -32,9 +34,17 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 }
 .playSong-wrap>.song-wrap>.song-disc{
 	position: relative;
-	width: 79vw;
-	height: 79vw;
+	width: 77vw;
+	height: 77vw;
 	margin: 0 auto;
+}
+@media screen and (min-width: 375px){
+	.playSong-wrap>.song-wrap>.song-disc{
+		position: relative;
+		width: 79vw;
+		height: 79vw;
+		margin: 0 auto;
+	}	
 }
 .playSong-wrap>.song-wrap>.song-disc .song-turn{
 	width: 100%;
@@ -115,12 +125,17 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 }
 .playSong-wrap>.song-info>h2{
 	color: white;
-	font-size: 18px;
+	font-size: 15px;
 	font-weight: bold;
 }
+@media screen and (min-width: 375px) {
+	.playSong-wrap>.song-info>h2{
+		font-size: 18px;
+	}
+}
 .playSong-wrap>.song-info>.lyrics{
-	margin: 18px auto 0;
-	font-size: 14px;
+	margin: 14px auto 0;
+	font-size: 13px;
 	color: #AEABAC;
 	height: 80px;
 	overflow: hidden;	

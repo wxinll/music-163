@@ -137,10 +137,13 @@ section.songs ol.songlists>li{
   padding-top: 5px;
   border-bottom: 1px solid #E2E2E3;
 }
-section.songs ol.songlists>li>h3{
+section.songs ol.songlists>li h3{
   font-size: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-section.songs ol.songlists>li>p{
+section.songs ol.songlists>li p{
   font-size: 12px;
   color: #888;
 }
