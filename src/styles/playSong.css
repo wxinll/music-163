@@ -140,6 +140,9 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 	height: 80px;
 	overflow: hidden;	
 }
+.playSong-wrap>.song-info .slide{
+	transition: all 0.8s;
+}
 .playSong-wrap>.song-info .slide p{
 	padding-bottom: 8px;
 }
