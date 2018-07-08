@@ -36,11 +36,11 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 	height: 79vw;
 	margin: 0 auto;
 }
-.playSong-wrap>.song-wrap>.song-disc>.song-turn{
+.playSong-wrap>.song-wrap>.song-disc .song-turn{
 	width: 100%;
 	height: 100%;
 }
-.playSong-wrap>.song-wrap>.song-disc>.song-turn::before{
+.playSong-wrap>.song-wrap>.song-disc .song-turn::before{
 	content: '';
 	position: absolute;
 	left: 0;
@@ -50,7 +50,7 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 	background: url(//s3.music.126.net/m/s/img/disc.png?d3bdd1080a72129346aa0b4b4964b75f) no-repeat;
 	background-size: contain;
 }
-.playSong-wrap>.song-wrap>.song-disc>.song-turn::after{
+.playSong-wrap>.song-wrap>.song-disc .song-turn::after{
 	content: '';
 	background: url(https://s3.music.126.net/m/s/img/needle-ip6.png?be4ebbeb6befadfcae75ce174e7db862) no-repeat;
 	background-size: contain;
@@ -59,6 +59,10 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 	left: 34vw;
 	width: 25vw;
 	height: 36vw;
+}
+.playSong-wrap>.song-wrap>.song-disc>.song-turn>.rotate-wrap{
+	width: 100%;
+	height: 100%;
 }
 .playSong-wrap>.song-wrap .songCover{
 	width: 48.5vw;
@@ -83,12 +87,9 @@ h1,h2,h3,h4,h5,h6{ font-weight: normal; }
 	width: 100%;
 }
 .playSong-wrap>.song-wrap .circling{
-	animation: circling 20s infinite linear;
-	animation-delay: 1s;
-	animation-play-state: paused;
 }
 .playSong-wrap>.song-wrap .active .circling{
-	animation-play-state: running;
+	animation: circling 20s infinite linear;
 }
 @keyframes circling{
 	0% {transform: rotate(0deg);}

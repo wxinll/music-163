@@ -25,6 +25,11 @@
 				this.$el.find('.song-disc')
 					.addClass('active')
 			}else if(status === 'paused'){
+				let child = this.$el.find('.songCover')[0]
+				let parent = this.$el.find('.rotate-wrap')[0]
+				let childTransform = getComputedStyle(child).transform
+				let parentTransform = getComputedStyle(parent).transform
+				parent.style.transform = (parentTransform === 'none') ? childTransform : childTransform.concat(' ', parentTransform)
 				this.$el.find('.song-disc')
 					.removeClass('active')
 			}
