@@ -1,7 +1,7 @@
 # wangyi music
 ## 目录
-移动端音乐界面 /src/index.html
-PC端后台歌曲上传管理界面 /src/admin.html
+- 移动端音乐界面 /src/index.html
+- PC端后台歌曲上传管理界面 /src/admin.html
 ## 使用
 1. git clone代码
 2. 代码目录下 npm i
