@@ -66,17 +66,23 @@
 		showLyrics(time){
 			let pArray = this.$el.find('.lyrics>.slide>p')
 			let p
+			let initalTime = pArray.eq(0).attr('data-time')
 			for(let i=0;i<pArray.length;i++){
-				if(i + 1 < pArray.length){
-					let currentTime = pArray.eq(i).attr('data-time')
-					let nextTime = pArray.eq(i+1).attr('data-time')
-					if(currentTime <= time && time < nextTime){
+				if( time > initalTime){
+					if(i + 1 === pArray.length){
 						p = pArray[i]
 						break
 					}
+					if(i + 1 < pArray.length){
+						let currentTime = pArray.eq(i).attr('data-time')
+						let nextTime = pArray.eq(i+1).attr('data-time')
+						if(currentTime <= time && time < nextTime){
+							p = pArray[i]
+							break
+						}
+					}
 				}else{
-					p = pArray[i]
-					break
+					p = pArray[0]
 				}
 			}
 			$(p).addClass('active')
@@ -87,6 +93,7 @@
 			let a = p.getBoundingClientRect().top
 			let b = $slide[0].getBoundingClientRect().top
 			let distance = a - b -25
+			console.log(p,time)
 			$slide.css({
 				transform: `translateY(${- distance }px)`
 			})
