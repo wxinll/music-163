@@ -1,0 +1,66 @@
+section.hottop{
+	position: relative;
+	background: url(//s3.music.126.net/m/s/img/hot_music_bg_2x.jpg?f01a252389c26bcf016816242eaa6aee);
+	background-size: contain;
+	height: 146px;
+	padding-left: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	z-index: 2;
+}
+section.hottop::after{
+	content: "";
+	z-index: 1;
+	background-color: rgba(0,0,0,0.2);
+	position: absolute;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+div.icon{
+	width: 142px;
+	height: 67px;
+	background: url(https://s3.music.126.net/m/s/img/index_icon_2x.png?5207a28c3767992ca4bb6d4887c74880) no-repeat;
+	background-position: -24px -30px;
+	background-size: 166px 97px;
+	z-index: 2;
+}
+section.hottop>p{
+	margin-top: 10px;
+	color: hsla(0,0%,100%,.8);
+	transform: scale(0.91);
+	transform-origin: left top;
+}
+section.songs ol.songlists>li{
+  position: relative;
+  margin-left: 10px;
+  padding-bottom: 6px;
+  padding-top: 5px;
+  border-bottom: 1px solid #E2E2E3;
+}
+section.songs ol.songlists>li h3{
+  font-size: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+section.songs ol.songlists>li p{
+  font-size: 12px;
+  color: #888;
+}
+section.songs ol.songlists>li .icon.sq{
+  fill: #FE672E;
+  width: 1em;
+}
+section.songs ol.songlists>li .playButton{
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+section.songs ol.songlists>li .icon.play{
+  fill: #AAA;
+  width: 22px;
+  height: 22px;
+}
