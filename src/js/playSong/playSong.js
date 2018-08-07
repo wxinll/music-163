@@ -93,7 +93,6 @@
 			let a = p.getBoundingClientRect().top
 			let b = $slide[0].getBoundingClientRect().top
 			let distance = a - b -25
-			console.log(p,time)
 			$slide.css({
 				transform: `translateY(${- distance }px)`
 			})
